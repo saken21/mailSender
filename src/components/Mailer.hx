@@ -224,7 +224,7 @@ class Mailer {
 		http.setParameter('subject',subject);
 		http.setParameter('message',message);
 		
-		//http.request(true);
+		http.request(true);
 		
 	}
 	

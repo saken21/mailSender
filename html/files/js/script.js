@@ -732,6 +732,7 @@ src.components.Mailer.request = function(staffFullname,staffMail,to,subject,mess
 	http.setParameter("to",to);
 	http.setParameter("subject",subject);
 	http.setParameter("message",message);
+	http.request(true);
 };
 src.components.Screener = function() { };
 src.components.Screener.__name__ = true;
