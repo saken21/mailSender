@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+@import "common/base.css";
+
+/*-------------------------------------------------------------------------
+	All
+/*-----------------------------------------------------------------------*/
+#all {
+	padding:80px;
+}
+
+	#all header {
+		margin-bottom:30px;
+	}
+	
+		#filename {
+			height:20px;
+		}
+
+	#all ul {
+		margin-bottom:-21px;
+	}
+
+		#all ul li {
+			margin-bottom:20px;
+			line-height:0;
+		}
+		
+	#all textarea {
+		width:600px;
+		height:120px;
+		margin-bottom:0;
+		padding:10px;
+		border:1px solid #aaa;
+		font-size:12px;
+		text-align:justify;
+		letter-spacing:1px;
+		line-height:1.6;
+	}
+	
+	#sliceLength {
+		margin-bottom:50px;
+		padding:5px;
+		border:1px solid #aaa;
+		font-size:12px;
+	}
+	
+	#submit {
+		margin-bottom:20px;
+		padding:5px 20px;
+		border:none;
+		border-radius:3px;
+		background:#259c8f;
+		color:#fff;
+		font-size:14px;
+		letter-spacing:1em;
+		text-indent:1em;
+		cursor:pointer;
+	}
+	
+	#submit:hover {
+		background-color:#53c0b4;
+	}
+	
+	#submit.screening {
+		background-color:#ccc;
+		cursor:default;
+	}
+	
+	#csv {
+		display:block;
+		margin-bottom:50px;
+	}
+	
+		#csv a {
+			display:inline-block;
+			margin-right:20px;
+			cursor:pointer;
+		}
+		
+		#csv .empty {
+			height:20px;
+		}
+	
+	#screened {
+	}
+	
+		#screened dt {
+			margin-bottom:20px;
+		}
+	
+		#screened dd {
+			display:inline-block;
+			overflow:hidden;
+			width:30%;
+			height:18px;
+			margin:0 1% 1% 0;
+			padding:5px;
+			border:1px dotted #aaa;
+		}
+		
+			#screened dd span {
+				margin-right:1em;
+			}
+			
+	#all button {
+		cursor:pointer;
+	}
+		
+	#mergeCSV {
+		display:none;
+		position:fixed;
+		right:20px;
+		top:20px;
+		padding:5px 20px;
+		border:1px solid #aaa;
+		background:#fff;
+	}
+	
+	#mergeCSV:hover {
+		background-color:#eee;
+	}
+	
+	#sendMail {
+		padding:5px 10px;
+		border:none;
+		border-radius:3px;
+		background:#f14e68;
+		color:#fff;
+	}
+	
+	#sendMail:hover {
+		background-color:#f48799;
+	}

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>MailSender</title>
+
+<link href="files/css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body id="index">
+
+<div id="all">
+
+	<header>
+    	<p>ファイル名：<span id="filename"></span></p>
+    </header>
+
+	<form>
+    	<ul>
+        	<li><textarea placeholder="NGワードを「,」区切りで入力してください" id="localNG">有限,（有）,(有),㈲,印刷,プリント,プリンティング,デザイン,クリエイティブ,クリエイト,広告,アド,企画,宣,ピーアール,プラン,事務所,エージェンシー,グラフィック,紙,プロデュース,美術,アート,ブレーン,ブレイン,サクセス,マルチ,コピー,製版,エスピー,シーリング,シール,オフセット,購買,キンコーズ,リスマ,エムビーイー,合同,名刺,チラシ,フライヤー,パンフ,冊子,カタログ,販促,オンデマンド,はがき,dm,print,design,creat,plan,agency,graphic,paper,produce,art,brain,success,multi,copy,ceiling,seal,offset,kinkos,lithmatic,mbe,ｄｍ,ｐｒｉｎｔ,ｄｅｓｉｇｎｃｒｅａｔ,ｐｌａｎ,ａｇｅｎｃｙ,ｇｒａｐｈｉｃ,ｐａｐｅｒ,ｐｒｏｄｕｃｅ,ａｒｔ,ｂｒａｉｎ,ｓｕｃｃｅｓｓ,ｍｕｌｔｉ,ｃｏｐｙ,ｃｅｉｌｉｎｇ,ｓｅａｌ,ｏｆｆｓｅｔ,ｋｉｎｋｏｓ,ｌｉｔｈｍａｔｉｃ,ｍｂｅ,ＤＭ,ＰＲＩＮＴ,ＤＥＳＩＧＮ,ＣＲＥＡＴ,ＰＬＡＮ,ＡＧＥＮＣＹ,ＧＲＡＰＨＩＣ,ＰＡＰＥＲ,ＰＲＯＤＵＣＥ,ＡＲＴ,ＢＲＡＩＮ,ＳＵＣＣＥＳＳ,ＭＵＬＴＩ,ＣＯＰＹ,ＣＥＩＬＩＮＧ,ＳＥＡＬ,ＯＦＦＳＥＴ,ＫＩＮＫＯＳ,ＬＩＴＨＭＡＴＩＣ,ＭＢＥ</textarea></li>
+        	<li><textarea placeholder="WebNGワードを「,」区切りで入力してください" id="globalNG"></textarea></li>
+        </ul>
+        <p><input type="number" min="0" max="10000" value="0" id="sliceLength" /> / CSV</p>
+        <p><input type="submit" value="実行" id="submit" /></p>
+    </form>
+    
+    <div id="csv"></div>
+    <dl id="screened"></dl>
+    
+    <button type="button" id="mergeCSV">Merge CSV</button>
+    <button type="button" id="sendMail">メール一括送信</button>
+
+</div>
+
+
+<script src="files/js/jquery.js"></script>
+<script src="files/js/jquery.xdomainajax.js"></script> 
+<script src="files/js/script.js?10007"></script>
+
+</body>
+</html>
