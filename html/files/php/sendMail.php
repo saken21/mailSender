@@ -6,12 +6,12 @@
 	$staffMail = $_POST['staffMail'];
 	$to        = $_POST['to'];
 	$subject   = $_POST['subject'];
-	$message   = $_POST['message'];
+	$body      = $_POST['body'];
 	
 	$reply   = $staffMail;
 	$headers = 'From: '.mb_encode_mimeheader('株式会社グラフィック '.$_POST['staffFullname']).'<'.$staffMail.'>'."\r\n".'Reply-To: '.$reply;
 
-	$isSuccess = mb_send_mail($to,$subject,$message,$headers);
+	$isSuccess = mb_send_mail($to,$subject,$body,$headers);
 	echo($isSuccess);
 
 ?>

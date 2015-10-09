@@ -1,11 +1,11 @@
 /**
 * ================================================================================
 *
-* MailSender ver 1.01.00
+* MailSender ver 1.01.01
 *
 * Author : KENTA SAKATA
 * Since  : 2015/07/24
-* Update : 2015/10/08
+* Update : 2015/10/09
 *
 * Licensed under the MIT License
 * Copyright (c) Kenta Sakata
@@ -20,8 +20,12 @@ import haxe.Http;
 import js.JQuery;
 import jp.saken.utils.Dom;
 import src.components.*;
+import src.utils.DB;
 
 class Main {
+	
+	public static var CAMPAIGN_LIST:Array<String> = ['151008_a'];
+	public static inline var TEST_MAIL:String = 'sakata@graphic.co.jp';
 	
 	public static function main():Void {
 		
@@ -32,9 +36,11 @@ class Main {
 
 	private static function init(event:JqEvent):Void {
 		
-		View.init();
-		Screener.init();
-		Mailer.init();
+		if (TEST_MAIL.length > 0) {
+			trace('\n--\nTest - ' + TEST_MAIL + '\n--\n');
+		}
+		
+		DB.load(View.init);
 		
 	}
 	

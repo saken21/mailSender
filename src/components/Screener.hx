@@ -2,56 +2,32 @@ package src.components;
 
 import js.JQuery;
 import jp.saken.utils.Handy;
-import jp.saken.utils.Ajax;
 import src.utils.Data;
-import src.utils.Util;
 import src.utils.Csv;
+import src.utils.ER;
 
 class Screener {
 	
-	private static var _mains       :Map<String,Dynamic>;
-	private static var _ngDomainEReg:EReg;
-	private static var _stopUserEReg:EReg;
-	private static var _localEReg   :EReg;
-	private static var _globalEReg  :EReg;
-	private static var _counter     :Int;
-	private static var _isBusy      :Bool;
+	private static var _mains  :Map<Int,Dynamic>;
+	private static var _counter:Int;
+	private static var _isBusy :Bool;
 	
 	private static inline var HEAD_LENGTH:Int = 9;
 	
 	/* =======================================================================
-	Public - Init
+	Public - Start
 	========================================================================== */
-	public static function init():Void {
-		
-		Ajax.getData('ngDomains',['domain'],function(data:Array<Dynamic>):Void {
-			_ngDomainEReg = Util.getERegByArray(data,'domain');
-		});
-		
-		Ajax.getData('stopUsers',['mailaddress'],function(data:Array<Dynamic>):Void {
-			_stopUserEReg = Util.getERegByArray(data,'mailaddress');
-		});
-		
+	public static function start():Void {
+
+		_mains = new Map();
+
+		var localScreenedData:Array<Dynamic> = getLocalScreenedData();
+		Data.setScreened(localScreenedData);
+
+		if (ER.global == null) Csv.export(localScreenedData);
+		else checkGlobalNG(localScreenedData);
+
 	}
-	
-		/* =======================================================================
-		Public - Start
-		========================================================================== */
-		public static function start(localNG:String,globalNG:String):Void {
-			
-			Util.check([_ngDomainEReg,_stopUserEReg]);
-
-			_mains      = new Map();
-			_localEReg  = Util.getERegByTextarea(localNG);
-			_globalEReg = Util.getERegByTextarea(globalNG);
-
-			var localScreenedData:Array<Dynamic> = getLocalScreenedData();
-			Data.setScreened(localScreenedData);
-
-			if (globalNG.length > 0) checkGlobalNG(localScreenedData);
-			else Csv.export(localScreenedData);
-
-		}
 		
 		/* =======================================================================
 		Public - Get Busy
@@ -119,7 +95,7 @@ class Screener {
 		
 		if (array.length < HEAD_LENGTH) return null;
 		
-		var id       :String = array[0];
+		var id       :Int    = Std.parseInt(array[0]);
 		var subID    :Int    = Std.parseInt(array[1]);
 		var lastdate :String = array[2];
 		var count    :String = array[3];
@@ -131,7 +107,7 @@ class Screener {
 		var datetime :String = array[10];
 		
 		if (corporate.length > 0) {
-			if (_localEReg.match(corporate)) return null;
+			if (ER.local.match(corporate)) return null;
 		} else {
 			return null;
 		}
@@ -140,8 +116,8 @@ class Screener {
 		
 		if (name.length == 0) return null;
 		if (!(mail.length > 0 && ~/@/.match(mail))) return null;
-		if (_ngDomainEReg.match(mail.split('@')[1])) return null;
-		if (_stopUserEReg.match(mail)) return null;
+		if (ER.ngDomains.match(mail.split('@')[1])) return null;
+		if (ER.stopUsers.match(mail)) return null;
 		
 		name = getReplaced(name);
 		
@@ -240,7 +216,7 @@ class Screener {
 		
 		trace('Keyword : ' + keywords);
 
-		if (!_globalEReg.match(keywords)) Data.pushScreened(info);
+		if (!ER.global.match(keywords)) Data.pushScreened(info);
 		
 	}
 	

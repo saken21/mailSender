@@ -5,8 +5,8 @@ import jp.saken.utils.Handy;
 import jp.saken.utils.Dom;
 import jp.saken.ui.DragAndDrop;
 import src.utils.Data;
-import src.utils.Util;
 import src.utils.Csv;
+import src.utils.ER;
 import src.utils.Test;
 
 class View {
@@ -26,7 +26,7 @@ class View {
 	========================================================================== */
 	public static function init():Void {
 		
-		_jAll         = new JQuery('#all');
+		_jAll         = new JQuery('#all').show();
 		_jSubmit      = new JQuery('#submit');
 		_jLocalNG     = new JQuery('#localNG');
 		_jGlobalNG    = new JQuery('#globalNG');
@@ -88,7 +88,7 @@ class View {
 
 				if (Screener.getBusy()) {
 
-					Util.alert('処理中です。しばらくお待ちください。');
+					Handy.alert('処理中です。しばらくお待ちください。');
 					return;
 
 				}
@@ -138,7 +138,8 @@ class View {
 		_jSubmit.addClass('screening');
 		Data.shiftRaw();
 		
-		Screener.start(_jLocalNG.prop('value'),_jGlobalNG.prop('value'));
+		ER.set(_jLocalNG.prop('value'),_jGlobalNG.prop('value'));
+		Screener.start();
 		
 		return untyped false;
 		

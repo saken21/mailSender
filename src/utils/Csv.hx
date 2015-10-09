@@ -36,7 +36,7 @@ class Csv {
 
 			if (!Data.hasSaved()) {
 
-				Util.alert('CSVがありません。');
+				Handy.alert('CSVがありません。');
 				return;
 
 			}
@@ -127,7 +127,7 @@ class Csv {
 		jAnchor.addClass('download').text('→ Download ' + _filename);
 		View.appendCSV(jAnchor);
 		
-		Util.alert('CSVの書き出しが完了しました。');
+		Handy.alert('CSVの書き出しが完了しました。');
 		
 	}
 	
