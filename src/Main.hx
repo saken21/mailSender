@@ -1,11 +1,11 @@
 /**
 * ================================================================================
 *
-* MailSender ver 1.01.01
+* MailSender ver 1.01.02
 *
 * Author : KENTA SAKATA
 * Since  : 2015/07/24
-* Update : 2015/10/09
+* Update : 2015/10/10
 *
 * Licensed under the MIT License
 * Copyright (c) Kenta Sakata

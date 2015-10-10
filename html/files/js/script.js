@@ -927,9 +927,13 @@ src.utils.Csv.getSingleHTML = function(corporate,name,mail) {
 };
 src.utils.Csv.ajax = function(data) {
 	var num;
-	if(src.utils.Csv._current == null) num = ""; else num = jp.saken.utils.Handy.getFilledNumber(src.utils.Csv._current) + "";
+	if(src.utils.Csv._current == null) num = ""; else num = jp.saken.utils.Handy.getFilledNumber(src.utils.Csv._current);
 	src.utils.Csv._filename = "data" + num + ".csv";
-	$.ajax({ type : "POST", url : "files/php/exportCSV.php", data : { data : data, filename : src.utils.Csv._filename}}).done(src.utils.Csv.onExported);
+	var http = new haxe.Http("files/php/exportCSV.php");
+	http.onData = src.utils.Csv.onExported;
+	http.setParameter("data",data);
+	http.setParameter("filename",src.utils.Csv._filename);
+	http.request(true);
 };
 src.utils.Csv.onExported = function(result) {
 	var filename = "data.csv";

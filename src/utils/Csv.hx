@@ -1,5 +1,6 @@
 package src.utils;
 
+import haxe.Http;
 import js.JQuery;
 import jp.saken.utils.Handy;
 import src.components.View;
@@ -99,16 +100,17 @@ class Csv {
 	========================================================================== */
 	private static function ajax(data:String):Void {
 		
-		var num:String = (_current == null) ? '' : Handy.getFilledNumber(_current) + '';
+		var num:String = (_current == null) ? '' : Handy.getFilledNumber(_current);
 		_filename = 'data' + num + '.csv';
 		
-		untyped $.ajax({
-			
-			type : 'POST',
-			url  : PHP_URL,
-			data : { data:data, filename:_filename }
-			
-		}).done(onExported);
+		var http:Http = new Http(PHP_URL);
+
+		http.onData = onExported;
+		
+		http.setParameter('data',data);
+		http.setParameter('filename',_filename);
+		
+		http.request(true);
 		
 	}
 	
