@@ -626,6 +626,7 @@ src.components.Mailer.__name__ = true;
 src.components.Mailer.send = function() {
 	var data = [];
 	var screenedData = src.utils.Data.getScreened();
+	src.components.Mailer._total = 0;
 	src.components.Mailer._counters = new haxe.ds.StringMap();
 	var _g1 = 0;
 	var _g = screenedData.length;
@@ -640,7 +641,8 @@ src.components.Mailer.ready = function(info) {
 	var staff = src.components.Mailer.getStaff(info.id);
 	var staffLastname = staff.lastname;
 	var staffFullname = staffLastname + Std.string(staff.firstname);
-	var staffMail = Std.string(staff.mailaddress) + "@graphic.co.jp";
+	var staffAlphabet = staff.mailaddress;
+	var staffMail = staffAlphabet + "@graphic.co.jp";
 	var message = src.components.Mailer.getMessage(info.date.length == 0);
 	var subject = message.get("subject");
 	var body = message.get("body");
@@ -649,6 +651,8 @@ src.components.Mailer.ready = function(info) {
 	body = StringTools.replace(body,"##3",staffLastname);
 	body = StringTools.replace(body,"##4",staffFullname);
 	body = StringTools.replace(body,"##5",staffMail);
+	body = StringTools.replace(body,"##6",Std.string(src.components.Mailer._total++));
+	body = StringTools.replace(body,"##7",HxOverrides.substr(staffAlphabet,0,2));
 	src.components.Mailer.request(staffFullname,staffMail,info.mail,subject,body);
 	info.staffName = staffLastname;
 	return info;
@@ -907,8 +911,8 @@ src.utils.Csv.getAdjusted = function(data) {
 	var array = [];
 	var _g = 0;
 	while(_g < length) {
-		var p = _g++;
-		var info = data[p];
+		var i = _g++;
+		var info = data[i];
 		var id = info.id;
 		var subID = info.subID;
 		var date = info.date;
@@ -1083,6 +1087,7 @@ src.utils.ER.getByText = function(value) {
 src.utils.Message = function() { };
 src.utils.Message.__name__ = true;
 src.utils.Message.set = function(data) {
+	src.utils.Message._counter = 0;
 	var map = new haxe.ds.StringMap();
 	var ampm;
 	if(new Date().getHours() > 12) ampm = "pm"; else ampm = "am";
@@ -1110,9 +1115,12 @@ src.utils.Message.getURLReplaced = function(body,name,ampm) {
 	while(_g1 < _g) {
 		var i = _g1++;
 		var info = src.utils.DB.pages[i];
-		var params = "?utm_source=" + name + "_" + (i + 1);
-		params += "&utm_medium=mail_" + ampm + "&utm_campaign=lp";
-		body = StringTools.replace(body,"##" + Std.string(info.id),Std.string(info.url) + params);
+		var id = info.id;
+		var param1 = "?utm_source=" + name + "&utm_content=" + id;
+		var param2 = "&utm_medium=mail_" + ampm + "&utm_campaign=lp";
+		var eReg = new EReg("##" + id,"");
+		var counter = 1;
+		while(eReg.match(body)) body = eReg.replace(body,Std.string(info.url) + param1 + counter++ + "_##6_##7" + param2);
 	}
 	return body;
 };

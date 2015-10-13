@@ -9,6 +9,7 @@ import src.utils.Message;
 
 class Mailer {
 	
+	private static var _total   :Int;
 	private static var _counters:Map<String,Int>;
 	
 	/* =======================================================================
@@ -19,6 +20,7 @@ class Mailer {
 		var data:Array<Dynamic> = [];
 		var screenedData:Array<Dynamic> = Data.getScreened();
 		
+		_total    = 0;
 		_counters = new Map();
 
 		for (p in 0...screenedData.length) {
@@ -39,7 +41,8 @@ class Mailer {
 		var staff        :Dynamic = getStaff(info.id);
 		var staffLastname:String  = staff.lastname;
 		var staffFullname:String  = staffLastname + staff.firstname;
-		var staffMail    :String  = staff.mailaddress + '@graphic.co.jp';
+		var staffAlphabet:String  = staff.mailaddress;
+		var staffMail    :String  = staffAlphabet + '@graphic.co.jp';
 		
 		var message:Map<String,String> = getMessage(info.date.length == 0);
 		
@@ -51,6 +54,8 @@ class Mailer {
 		body = StringTools.replace(body,'##3',staffLastname);
 		body = StringTools.replace(body,'##4',staffFullname);
 		body = StringTools.replace(body,'##5',staffMail);
+		body = StringTools.replace(body,'##6',Std.string(_total++));
+		body = StringTools.replace(body,'##7',staffAlphabet.substr(0,2));
 
 		request(staffFullname,staffMail,info.mail,subject,body);
 		

@@ -59,9 +59,9 @@ class Csv {
 		
 		var array:Array<String> = [];
 		
-		for (p in 0...length) {
+		for (i in 0...length) {
 			
-			var info     :Dynamic = data[p];
+			var info     :Dynamic = data[i];
 			var id       :String  = info.id;
 			var subID    :String  = info.subID;
 			var date     :String  = info.date;
