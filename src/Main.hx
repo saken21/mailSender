@@ -1,11 +1,11 @@
 /**
 * ================================================================================
 *
-* MailSender ver 1.01.03
+* MailSender ver 1.01.04
 *
 * Author : KENTA SAKATA
 * Since  : 2015/07/24
-* Update : 2015/10/13
+* Update : 2015/10/22
 *
 * Licensed under the MIT License
 * Copyright (c) Kenta Sakata
@@ -24,8 +24,8 @@ import src.utils.DB;
 
 class Main {
 	
-	public static var CAMPAIGN_LIST:Array<String> = ['151008_a'];
-	public static inline var TEST_MAIL:String = 'sakata@graphic.co.jp';
+	public static var CAMPAIGN_LIST:Array<String> = ['151022_c'];
+	public static inline var TEST_MAIL:String = '';
 	
 	public static function main():Void {
 		

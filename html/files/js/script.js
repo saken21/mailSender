@@ -614,7 +614,7 @@ src.Main.main = function() {
 	new js.JQuery("document").ready(src.Main.init);
 };
 src.Main.init = function(event) {
-	if("sakata@graphic.co.jp".length > 0) console.log("\n--\nTest - " + "sakata@graphic.co.jp" + "\n--\n");
+	if("".length > 0) console.log("\n--\nTest - " + "" + "\n--\n");
 	src.utils.DB.load(src.components.View.init);
 };
 src.Main.onBeforeunload = function(event) {
@@ -626,7 +626,7 @@ src.components.Mailer.__name__ = true;
 src.components.Mailer.send = function() {
 	var data = [];
 	var screenedData = src.utils.Data.getScreened();
-	src.components.Mailer._total = 0;
+	src.components.Mailer._total = 1;
 	src.components.Mailer._counters = new haxe.ds.StringMap();
 	var _g1 = 0;
 	var _g = screenedData.length;
@@ -682,7 +682,7 @@ src.components.Mailer.getMessage = function(isFirst) {
 	return src.utils.Message.normal;
 };
 src.components.Mailer.request = function(staffFullname,staffMail,to,subject,body) {
-	if("sakata@graphic.co.jp".length > 0) to = "sakata@graphic.co.jp";
+	if("".length > 0) to = "";
 	console.log(to);
 	var http = new haxe.Http("files/php/sendMail.php");
 	http.setParameter("staffFullname",staffFullname);
@@ -1157,11 +1157,13 @@ Date.__name__ = ["Date"];
 var q = window.jQuery;
 js.JQuery = q;
 jp.saken.utils.Ajax.PATH = "files/php/";
+jp.saken.utils.Dom.document = window.document;
 jp.saken.utils.Dom.window = window;
 jp.saken.utils.Dom.jWindow = new js.JQuery(jp.saken.utils.Dom.window);
-jp.saken.utils.Dom.jBody = new js.JQuery("body");
-src.Main.CAMPAIGN_LIST = ["151008_a"];
-src.Main.TEST_MAIL = "sakata@graphic.co.jp";
+jp.saken.utils.Dom.body = jp.saken.utils.Dom.document.body;
+jp.saken.utils.Dom.jBody = new js.JQuery(jp.saken.utils.Dom.body);
+src.Main.CAMPAIGN_LIST = ["151022_c"];
+src.Main.TEST_MAIL = "";
 src.components.Screener.HEAD_LENGTH = 9;
 src.utils.Csv.PHP_URL = "files/php/exportCSV.php";
 src.Main.main();

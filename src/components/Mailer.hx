@@ -20,7 +20,7 @@ class Mailer {
 		var data:Array<Dynamic> = [];
 		var screenedData:Array<Dynamic> = Data.getScreened();
 		
-		_total    = 0;
+		_total    = 1;
 		_counters = new Map();
 
 		for (p in 0...screenedData.length) {
