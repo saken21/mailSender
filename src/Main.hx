@@ -5,7 +5,7 @@
 *
 * Author : KENTA SAKATA
 * Since  : 2015/07/24
-* Update : 2015/10/22
+* Update : 2015/11/18
 *
 * Licensed under the MIT License
 * Copyright (c) Kenta Sakata
@@ -25,7 +25,7 @@ import src.utils.DB;
 class Main {
 	
 	public static var CAMPAIGN_LIST:Array<String> = ['151022_c'];
-	public static inline var TEST_MAIL:String = '';
+	public static inline var TEST_MAIL:String = 'm1770035151@15qm-dea-2.xyz';
 	
 	public static function main():Void {
 		

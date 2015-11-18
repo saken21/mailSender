@@ -297,7 +297,7 @@ jp.saken.ui.DragAndDrop = function(jTarget,onSuccess,type) {
 	this._jTarget = jTarget;
 	this._onSuccess = onSuccess;
 	this._type = type;
-	jTarget.on({ drop : $bind(this,this.onDrop), dragenter : $bind(this,this.onEnter), dragover : $bind(this,this.onOver)});
+	jTarget.on({ drop : $bind(this,this.onDrop), dragenter : $bind(this,this.onEnter), dragover : $bind(this,this.onOver), dragleave : $bind(this,this.onLeave)});
 };
 jp.saken.ui.DragAndDrop.__name__ = true;
 jp.saken.ui.DragAndDrop.prototype = {
@@ -311,7 +311,7 @@ jp.saken.ui.DragAndDrop.prototype = {
 		fileReader.onload = $bind(this,this.onLoaded);
 		if(this._type == "text") fileReader.readAsText(file); else if(this._type == "image") fileReader.readAsDataURL(file);
 		this.cancel(event);
-		this._jTarget.trigger("onDrop");
+		this._jTarget.removeClass("dragging").trigger("onDrop");
 		return false;
 	}
 	,onLoaded: function(event) {
@@ -324,7 +324,12 @@ jp.saken.ui.DragAndDrop.prototype = {
 	}
 	,onOver: function(event) {
 		this.cancel(event);
-		this._jTarget.trigger("onOver");
+		this._jTarget.addClass("dragging").trigger("onOver");
+		return false;
+	}
+	,onLeave: function(event) {
+		this.cancel(event);
+		this._jTarget.removeClass("dragging").trigger("onOver");
 		return false;
 	}
 	,cancel: function(event) {
@@ -614,7 +619,7 @@ src.Main.main = function() {
 	new js.JQuery("document").ready(src.Main.init);
 };
 src.Main.init = function(event) {
-	if("".length > 0) console.log("\n--\nTest - " + "" + "\n--\n");
+	if("m1770035151@15qm-dea-2.xyz".length > 0) console.log("\n--\nTest - " + "m1770035151@15qm-dea-2.xyz" + "\n--\n");
 	src.utils.DB.load(src.components.View.init);
 };
 src.Main.onBeforeunload = function(event) {
@@ -682,9 +687,12 @@ src.components.Mailer.getMessage = function(isFirst) {
 	return src.utils.Message.normal;
 };
 src.components.Mailer.request = function(staffFullname,staffMail,to,subject,body) {
-	if("".length > 0) to = "";
+	if("m1770035151@15qm-dea-2.xyz".length > 0) to = "m1770035151@15qm-dea-2.xyz";
 	console.log(to);
 	var http = new haxe.Http("files/php/sendMail.php");
+	http.onData = function(data) {
+		console.log(data);
+	};
 	http.setParameter("staffFullname",staffFullname);
 	http.setParameter("staffMail",staffMail);
 	http.setParameter("to",to);
@@ -902,7 +910,9 @@ src.utils.Csv.merge = function() {
 		return;
 	}
 	src.utils.Csv._current = null;
-	src.utils.Csv["export"](src.utils.Data.getSaved());
+	var data = src.utils.Data.getSaved();
+	src.utils.Csv["export"](data);
+	src.utils.Data.setScreened(data);
 	src.utils.Data.clearSaved();
 };
 src.utils.Csv.getAdjusted = function(data) {
@@ -1162,8 +1172,9 @@ jp.saken.utils.Dom.window = window;
 jp.saken.utils.Dom.jWindow = new js.JQuery(jp.saken.utils.Dom.window);
 jp.saken.utils.Dom.body = jp.saken.utils.Dom.document.body;
 jp.saken.utils.Dom.jBody = new js.JQuery(jp.saken.utils.Dom.body);
+jp.saken.utils.Dom.userAgent = jp.saken.utils.Dom.window.navigator.userAgent;
 src.Main.CAMPAIGN_LIST = ["151022_c"];
-src.Main.TEST_MAIL = "";
+src.Main.TEST_MAIL = "m1770035151@15qm-dea-2.xyz";
 src.components.Screener.HEAD_LENGTH = 9;
 src.utils.Csv.PHP_URL = "files/php/exportCSV.php";
 src.Main.main();

@@ -43,8 +43,12 @@ class Csv {
 			}
 
 			_current = null;
-
-			export(Data.getSaved());
+			
+			var data:Array<Dynamic> = Data.getSaved();
+			
+			export(data);
+			
+			Data.setScreened(data);
 			Data.clearSaved();
 
 		}

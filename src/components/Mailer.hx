@@ -131,6 +131,8 @@ class Mailer {
 		
 		var http:Http = new Http('files/php/sendMail.php');
 		
+		http.onData = function(data:String):Void { trace(data); };
+		
 		http.setParameter('staffFullname',staffFullname);
 		http.setParameter('staffMail',staffMail);
 		http.setParameter('to',to);
