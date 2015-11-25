@@ -1,11 +1,11 @@
 /**
 * ================================================================================
 *
-* MailSender ver 1.01.04
+* MailSender ver 1.01.05
 *
 * Author : KENTA SAKATA
 * Since  : 2015/07/24
-* Update : 2015/11/18
+* Update : 2015/11/25
 *
 * Licensed under the MIT License
 * Copyright (c) Kenta Sakata
@@ -24,8 +24,8 @@ import src.utils.DB;
 
 class Main {
 	
-	public static var CAMPAIGN_LIST:Array<String> = ['151022_c'];
-	public static inline var TEST_MAIL:String = 'm1770035151@15qm-dea-2.xyz';
+	public static var CAMPAIGN_LIST:Array<String> = ['151008_a','151125_a_f'];
+	public static inline var TEST_MAIL:String = '';
 	
 	public static function main():Void {
 		

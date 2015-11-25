@@ -619,7 +619,7 @@ src.Main.main = function() {
 	new js.JQuery("document").ready(src.Main.init);
 };
 src.Main.init = function(event) {
-	if("m1770035151@15qm-dea-2.xyz".length > 0) console.log("\n--\nTest - " + "m1770035151@15qm-dea-2.xyz" + "\n--\n");
+	if("".length > 0) console.log("\n--\nTest - " + "" + "\n--\n");
 	src.utils.DB.load(src.components.View.init);
 };
 src.Main.onBeforeunload = function(event) {
@@ -687,7 +687,7 @@ src.components.Mailer.getMessage = function(isFirst) {
 	return src.utils.Message.normal;
 };
 src.components.Mailer.request = function(staffFullname,staffMail,to,subject,body) {
-	if("m1770035151@15qm-dea-2.xyz".length > 0) to = "m1770035151@15qm-dea-2.xyz";
+	if("".length > 0) to = "";
 	console.log(to);
 	var http = new haxe.Http("files/php/sendMail.php");
 	http.onData = function(data) {
@@ -753,9 +753,9 @@ src.components.Screener.getInfo = function(array) {
 	var mail = array[9];
 	var datetime = array[10];
 	if(corporate.length > 0) {
+		corporate = src.components.Screener.getReplaced(corporate);
 		if(src.utils.ER.local.match(corporate)) return null;
 	} else return null;
-	corporate = src.components.Screener.getReplaced(corporate);
 	if(name.length == 0) return null;
 	if(!(mail.length > 0 && new EReg("@","").match(mail))) return null;
 	if(src.utils.ER.ngDomains.match(mail.split("@")[1])) return null;
@@ -779,6 +779,7 @@ src.components.Screener.getInfo = function(array) {
 	return { id : id, subID : subID, date : lastdate, corporate : corporate, name : name, mail : mail};
 };
 src.components.Screener.getReplaced = function(value) {
+	value = StringTools.replace(value,"⑰","㈲");
 	value = StringTools.replace(value,"⑭","（株）");
 	value = StringTools.replace(value,"&amp;","&");
 	value = StringTools.replace(value,"&#039;","'");
@@ -1173,8 +1174,8 @@ jp.saken.utils.Dom.jWindow = new js.JQuery(jp.saken.utils.Dom.window);
 jp.saken.utils.Dom.body = jp.saken.utils.Dom.document.body;
 jp.saken.utils.Dom.jBody = new js.JQuery(jp.saken.utils.Dom.body);
 jp.saken.utils.Dom.userAgent = jp.saken.utils.Dom.window.navigator.userAgent;
-src.Main.CAMPAIGN_LIST = ["151022_c"];
-src.Main.TEST_MAIL = "m1770035151@15qm-dea-2.xyz";
+src.Main.CAMPAIGN_LIST = ["151008_a","151125_a_f"];
+src.Main.TEST_MAIL = "";
 src.components.Screener.HEAD_LENGTH = 9;
 src.utils.Csv.PHP_URL = "files/php/exportCSV.php";
 src.Main.main();

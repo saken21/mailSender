@@ -107,12 +107,15 @@ class Screener {
 		var datetime :String = array[10];
 		
 		if (corporate.length > 0) {
+			
+			corporate = getReplaced(corporate);
 			if (ER.local.match(corporate)) return null;
+			
 		} else {
+			
 			return null;
-		}
 		
-		corporate = getReplaced(corporate);
+		}
 		
 		if (name.length == 0) return null;
 		if (!(mail.length > 0 && ~/@/.match(mail))) return null;
@@ -154,6 +157,7 @@ class Screener {
 	========================================================================== */
 	private static function getReplaced(value:String):String {
 		
+		value = StringTools.replace(value,'⑰','㈲');
 		value = StringTools.replace(value,'⑭','（株）');
 		value = StringTools.replace(value,'&amp;','&');
 		value = StringTools.replace(value,'&#039;','\'');
